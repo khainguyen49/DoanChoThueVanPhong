@@ -1,0 +1,37 @@
+float num = 0;
+            if(float.TryParse(txtLuong.Text, out num))
+            {
+                System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("en-US");
+                float value = float.Parse(txtLuong.Text, System.Globalization.NumberStyles.AllowThousands);
+                txtLuong.Text = String.Format(culture, "{0:N0}", value);
+                txtLuong.Select(txtLuong.Text.Length, 0);
+            }   
+            
+string sql = @"select * from tbl_NhanVien";
+            SqlConnection conn = new SqlConnection();
+            conn.ConnectionString = "data source=LAPTOP-OH9ESAI8\\SQLEXPRESS;initial catalog=QuanLyChoThueVanPhong;integrated security=True";
+            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            string ma = "";
+            if (dt.Rows.Count <= 0)
+            {
+                ma = "NV01";
+            }
+            else
+            {
+                int k;
+                ma = "NV";
+                k = Convert.ToInt32(dt.Rows[dt.Rows.Count - 1][0].ToString().Substring(2, 2));
+                k = k + 1;
+                if (k < 10)
+                {
+                    ma = ma + "0";
+                }
+                else if (k < 100)
+                {
+                    ma = ma + "";
+                }
+                ma = ma + k.ToString();
+            }
+            return ma;
