@@ -1,0 +1,23 @@
+string x = "";
+            for(int i = 0; i < dgvKH.RowCount; i++)
+            {
+                if(Convert.ToBoolean(dgvKH.Rows[i].Cells[0].Value) == true)
+                {
+                    x = Convert.ToString(dgvKH.Rows[i].Cells[1].Value);
+                }
+            }
+            return x;
+tbl_KhachHang kh = new tbl_KhachHang();
+                            kh.MaKhachHang = makh;
+                            kh.HoTenKhach = tenkh;
+                            kh.GioiTinh = gioitinh;
+                            kh.DiaChi = diachi;
+                            kh.CMND = cmnd;
+                            kh.SDT = sdt;
+                            db.tbl_KhachHang.Add(kh);
+                            db.SaveChanges();
+                            HienThiDSKhachHang();
+                            XtraMessageBox.Show("Thêm khách hàng thành công!", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            setNull();
+                            setButton(true);
+                            setKhoa(true);
